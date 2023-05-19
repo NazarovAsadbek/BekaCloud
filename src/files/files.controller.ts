@@ -25,12 +25,12 @@ import { FileType } from './entities/file.entity';
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
-  @Get()
+  @Get('/get')
   getAll(@UserIdDecorator() userId: number, @Query('type') fileType: FileType) {
     return this.filesService.findAll(userId, fileType);
   }
 
-  @Post()
+  @Post('/create')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: fileStorage,
@@ -60,7 +60,7 @@ export class FilesController {
     return this.filesService.create(file, userId);
   }
 
-  @Delete()
+  @Delete('/delete')
   remove(@UserIdDecorator() userId: number, @Query('ids') ids: string) {
     return this.filesService.remove(userId, ids);
   }

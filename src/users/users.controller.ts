@@ -10,7 +10,7 @@ import { UserIdDecorator } from '../decorators/user-id.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get('/info')
+  @Get('/info/get')
   @UseGuards(JwtAuthGuard)
   getUserInfo(@UserIdDecorator() id: number) {
     return this.usersService.findById(id);
